@@ -137,8 +137,10 @@ export default function OptionMain({
           />
         }
         data={
-          data?.restaurant?.addons.slice().reverse() ||
-          (loading ? generateDummyAddons() : [])
+          (data?.restaurant?.addons || [])
+            .filter(addon => addon.title !== 'Default Addon') // Filter out default addons that is coming from the backend
+            .slice()
+            .reverse() || []
         }
         filters={filters}
         setSelectedData={setSelectedProducts}
